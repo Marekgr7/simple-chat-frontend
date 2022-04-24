@@ -64,6 +64,6 @@ export const messengerSlice = createSlice({
   },
 });
 
-export const { setOnlineUsers, setChatHistory } = messengerSlice;
+export const { setOnlineUsers, setChatHistory } = messengerSlice.actions;
 
 export default messengerSlice.reducer;
