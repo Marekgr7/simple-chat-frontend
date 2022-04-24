@@ -6,7 +6,7 @@ import Label from "../../shared/components/Label";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 10%;
+  min-height: 10%;
   display: flex;
   align-items: center;
   background: linear-gradient(180deg, #00bca4 0%, #27dcc5 100%);

@@ -28,7 +28,7 @@ const Chatbox = ({ nick, socketId }) => {
     <Wrapper>
       <Navbar nick={nick} socketId={socketId} />
       <MessagesContainer chatMessages={specificUserChatHistory} />
-      <NewMessageInput />
+      <NewMessageInput socketId={socketId} />
     </Wrapper>
   );
 };

@@ -19,4 +19,12 @@ export const connectWithSocketIOServer = () => {
       socket.id
     );
   });
+
+  socket.on("chat-message", () => {
+    console.log("new chat message came");
+  });
+};
+
+export const sendNewChatMessage = (data) => {
+  socket.emit("chat-message", data);
 };
