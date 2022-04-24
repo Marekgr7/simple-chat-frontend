@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 import Navbar from "./Navbar";
 import MessagesContainer from "./MessagesContainer";
@@ -18,10 +19,15 @@ const Wrapper = styled.div`
 `;
 
 const Chatbox = ({ nick, socketId }) => {
+  const chatHistory = useSelector((state) => state.messenger.chatHistory);
+
+  const specificUserChatHistory =
+    chatHistory.find((c) => c.socketId === socketId)?.messages || [];
+
   return (
     <Wrapper>
       <Navbar nick={nick} socketId={socketId} />
-      <MessagesContainer />
+      <MessagesContainer chatMessages={specificUserChatHistory} />
       <NewMessageInput />
     </Wrapper>
   );

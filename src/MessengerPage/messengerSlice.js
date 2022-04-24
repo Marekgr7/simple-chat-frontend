@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { messagesTypes } from "../realtimeCommunication/chat/chatController";
 
 export const DUMMY_ONLINE_USERS = [
   {
@@ -15,9 +16,32 @@ export const DUMMY_ONLINE_USERS = [
   },
 ];
 
+export const DUMMY_CHAT_HISTORY = [
+  {
+    socketId: "123",
+    messages: [
+      {
+        id: 1,
+        type: messagesTypes.CREATED,
+        content: "Hello world",
+      },
+      {
+        id: 2,
+        type: messagesTypes.RECEIVED,
+        content: "Hello",
+      },
+      {
+        id: 3,
+        type: messagesTypes.WARNING,
+        content: "Command invalid. Please enter valid command",
+      },
+    ],
+  },
+];
+
 export const initialState = {
   onlineUsers: DUMMY_ONLINE_USERS,
-  chatHistory: [],
+  chatHistory: DUMMY_CHAT_HISTORY,
   nickname: null,
 };
 

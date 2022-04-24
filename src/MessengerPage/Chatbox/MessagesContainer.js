@@ -9,8 +9,18 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const MessagesContainer = () => {
-  return <Wrapper>Messages</Wrapper>;
+const MessagesContainer = ({ chatMessages }) => {
+  return (
+    <Wrapper>
+      {chatMessages.map((m) => (
+        <div key={m.id}>{m.content}</div>
+      ))}
+    </Wrapper>
+  );
+};
+
+MessagesContainer.propTypes = {
+  chatMessages: PropTypes.array.isRequired,
 };
 
 export default MessagesContainer;
