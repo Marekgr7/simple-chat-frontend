@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import Label from "../shared/components/Label";
 import Guide from "./Guide";
 import messages from "./MessengerPage.messages";
 import Chatbox from "./Chatbox/Chatbox";
+
+import "./messengerPage.css";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -30,13 +33,17 @@ const MessengerPage = () => {
     <Wrapper>
       <Label text={messages.title} />
       <Chatboxes>
-        {onlineUsers.map((user) => (
-          <Chatbox
-            key={user.socketId}
-            nick={user.nick}
-            socketId={user.socketId}
-          />
-        ))}
+        <TransitionGroup component={null}>
+          {onlineUsers.map((user) => (
+            <CSSTransition
+              key={user.socketId}
+              timeout={700}
+              classNames="chatbox"
+            >
+              <Chatbox nick={user.nick} socketId={user.socketId} />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
       </Chatboxes>
       <Guide />
     </Wrapper>

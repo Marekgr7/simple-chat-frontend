@@ -46,8 +46,8 @@ export const DUMMY_CHAT_HISTORY = [
 ];
 
 export const initialState = {
-  onlineUsers: DUMMY_ONLINE_USERS,
-  chatHistory: DUMMY_CHAT_HISTORY,
+  onlineUsers: [],
+  chatHistory: [],
   nickname: null,
 };
 
