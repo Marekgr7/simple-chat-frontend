@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  socketId: null,
+  ownSocketId: null,
 };
 
 export const realtimeCommunicationSlice = createSlice({
   name: "realtimeCommunication",
   initialState,
   reducers: {
-    setSocketId: (state, action) => {
-      state.socketId = action.payload;
+    setOwnSocketId: (state, action) => {
+      state.ownSocketId = action.payload;
     },
   },
 });
 
-export const { setSocketId } = realtimeCommunicationSlice;
+export const { setOwnSocketId } = realtimeCommunicationSlice.actions;
 
 export default realtimeCommunicationSlice.reducer;
