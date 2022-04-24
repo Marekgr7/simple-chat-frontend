@@ -35,6 +35,12 @@ export const DUMMY_CHAT_HISTORY = [
         type: messagesTypes.WARNING,
         content: "Command invalid. Please enter valid command",
       },
+      {
+        id: 4,
+        type: messagesTypes.CREATED,
+        content:
+          "Command invalid. Please enter valid command. Command invalid. Please enter valid command. Command invalid. Please enter valid command.",
+      },
     ],
   },
 ];

@@ -10,6 +10,7 @@ const WarningBox = styled.p`
   color: red;
   font-size: 12px;
   text-align: center;
+  font-weight: bold;
 `;
 
 const WarningMessage = ({ content }) => {
