@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -11,10 +11,18 @@ const Wrapper = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const MessagesContainer = ({ chatMessages }) => {
+  const scrollRef = useRef();
+
+  const scrollToBottom = () => {
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(scrollToBottom, [chatMessages]);
+
   return (
     <Wrapper>
       {chatMessages.map((m) => {
@@ -24,6 +32,7 @@ const MessagesContainer = ({ chatMessages }) => {
           <SingleMessage key={m.id} content={m.content} type={m.type} />
         );
       })}
+      <div ref={scrollRef} />
     </Wrapper>
   );
 };

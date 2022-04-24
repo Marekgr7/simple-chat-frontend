@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: ${(props) =>
     props.type === messagesTypes.CREATED ? "flex-end" : "flex-start"};
+  animation: message-slide-from-left 0.6s ease 0s 1 normal forwards;
 `;
 
 const MessageLeft = styled.p`

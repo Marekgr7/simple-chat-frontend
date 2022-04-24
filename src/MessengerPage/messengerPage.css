@@ -1,17 +1,26 @@
-/* React transition group animations */
-
 .chatbox-enter {
     transform: translateY(100%);
   }
-  .chatbox-enter-active {
+.chatbox-enter-active {
     transform: translateY(0);
     transition: all 0.7s ease;
   }
-  .chatbox-exit {
+.chatbox-exit {
     transform: translateY(0);
   }
-  .chatbox-exit-active {
+.chatbox-exit-active {
     transform: translateY(-100%);
     transition: all 0.7s ease;
   }
   
+@keyframes message-slide-from-left {
+	0% {
+		opacity: 0;
+		transform: translateX(-250px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
