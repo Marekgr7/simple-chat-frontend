@@ -9,6 +9,10 @@ export const DUMMY_ONLINE_USERS = [
     socketId: "345",
     nick: "GGG",
   },
+  {
+    socketId: "567",
+    nick: null,
+  },
 ];
 
 export const initialState = {
