@@ -1,7 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const DUMMY_ONLINE_USERS = [
+  {
+    socketId: "123",
+    nick: "Canelo",
+  },
+  {
+    socketId: "345",
+    nick: "GGG",
+  },
+];
+
 export const initialState = {
-  onlineUsers: [],
+  onlineUsers: DUMMY_ONLINE_USERS,
   chatHistory: [],
   nickname: null,
 };
