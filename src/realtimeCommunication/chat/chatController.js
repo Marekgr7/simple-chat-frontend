@@ -19,33 +19,38 @@ export const getMessageTypesInArray = () => {
   return messageTypesArray;
 };
 
-export const processNewChatMessage = ({ message, socketId }) => {
-  if (message.startsWith("/")) {
-    processNewChatCommand(message);
+export const processNewChatMessage = ({ messageContent, socketId }) => {
+  if (messageContent.startsWith("/")) {
+    processNewChatCommand(messageContent);
   } else {
-    processSendingChatMessage(message, socketId);
+    processSendingChatMessage(messageContent, socketId);
   }
 };
 
-const processNewChatCommand = (message = "") => {
+const processNewChatCommand = (messageContent = "") => {
   // TODO
   // chat commands
 };
 
-const processSendingChatMessage = (message, receiverSocketId) => {
-  addCreatedMessageToStore({
-    message,
+const processSendingChatMessage = (messageContent, receiverSocketId) => {
+  const newMessage = {
+    id: uuidv4(),
+    content: messageContent,
+  };
+
+  addMessageToStore({
+    newMessage,
     chatHistorySocketId: receiverSocketId,
     messageType: messagesTypes.CREATED,
   });
   socketConnection.sendNewChatMessage({
-    content: message,
+    message: newMessage,
     receiverSocketId,
   });
 };
 
-const addCreatedMessageToStore = ({
-  message,
+export const addMessageToStore = ({
+  newMessage,
   chatHistorySocketId,
   messageType,
 }) => {
@@ -54,10 +59,9 @@ const addCreatedMessageToStore = ({
     (c) => c.socketId === chatHistorySocketId
   );
 
-  const newMessage = {
-    content: message,
+  const newStoreMessage = {
+    ...newMessage,
     type: messageType,
-    id: uuidv4(),
   };
 
   if (specificUserIndex !== -1) {
@@ -65,14 +69,17 @@ const addCreatedMessageToStore = ({
 
     newChatHistory[specificUserIndex] = {
       ...newChatHistory[specificUserIndex],
-      messages: [...newChatHistory[specificUserIndex].messages, newMessage],
+      messages: [
+        ...newChatHistory[specificUserIndex].messages,
+        newStoreMessage,
+      ],
     };
 
     store.dispatch(setChatHistory(newChatHistory));
   } else {
     const newSpecificChatHistory = {
       socketId: chatHistorySocketId,
-      messages: [newMessage],
+      messages: [newStoreMessage],
     };
 
     store.dispatch(setChatHistory([...chatHistory, newSpecificChatHistory]));

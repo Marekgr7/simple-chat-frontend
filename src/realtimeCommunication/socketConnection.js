@@ -3,6 +3,7 @@ import store from "../store/store";
 
 import { setOwnSocketId } from "./realtimeCommunicationSlice";
 import * as onlineUsersController from "./onlineUsers/onlineUsersController";
+import * as chatController from "./chat/chatController";
 
 let socket = null;
 
@@ -20,8 +21,14 @@ export const connectWithSocketIOServer = () => {
     );
   });
 
-  socket.on("chat-message", () => {
-    console.log("new chat message came");
+  socket.on("chat-message", (chatMessageData) => {
+    console.log(chatMessageData);
+
+    chatController.addMessageToStore({
+      chatHistorySocketId: chatMessageData.senderSocketId,
+      messageType: chatController.messagesTypes.RECEIVED,
+      newMessage: chatMessageData.message,
+    });
   });
 };
 

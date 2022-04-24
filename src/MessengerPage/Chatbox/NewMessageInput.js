@@ -40,13 +40,13 @@ const NewMessageInput = ({ socketId }) => {
 
   const handleKeyPressed = (event) => {
     if (event.code === "Enter" && message.length > 0) {
-      proceedChatMessage(message);
+      proceedChatMessage();
       setMessage("");
     }
   };
 
   const proceedChatMessage = () => {
-    chatController.processNewChatMessage({ message, socketId });
+    chatController.processNewChatMessage({ messageContent: message, socketId });
   };
 
   return (
