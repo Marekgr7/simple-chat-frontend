@@ -76,14 +76,20 @@ export const messengerSlice = createSlice({
       );
     },
     setSpecificMessageAdditionalStyles: (state, action) => {
-      const { chatHistorySocketId, additionalStyles } = action.payload;
+      const {
+        chatHistorySocketId,
+        additionalStyles,
+        messageId = null,
+      } = action.payload;
 
       const specificChatHistory = state.chatHistory.find(
         (history) => history.socketId === chatHistorySocketId
       );
       if (!specificChatHistory) return state;
 
-      const messageIndex = specificChatHistory.messages.length - 1;
+      const messageIndex = messageId
+        ? specificChatHistory.messages.findIndex((m) => m.id === messageId)
+        : specificChatHistory.messages.length - 1;
 
       specificChatHistory.messages[messageIndex] = {
         ...specificChatHistory.messages[messageIndex],

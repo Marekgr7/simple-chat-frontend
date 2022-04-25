@@ -1,6 +1,7 @@
 import changeOwnNick from "./changeOwnNick";
 import undoLastMessage from "./undoLastMessage";
 import fadeLastMessage from "./fadeLastMessage";
+import highlightMessage from "./highlightMessage";
 
 const chatCommands = {
   NICK: "/nick",
@@ -22,6 +23,10 @@ export const chatCommandsList = [
   {
     command: chatCommands.FADE_LAST,
     onSuccess: fadeLastMessage,
+  },
+  {
+    command: chatCommands.HIGHLIGHT,
+    onSuccess: highlightMessage,
   },
 ];
 
