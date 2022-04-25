@@ -1,12 +1,12 @@
 import changeOwnNick from "./changeOwnNick";
 
 const chatCommands = {
-  NICK: "nick",
-  HIGHLIGHT: "highlight",
-  OOPS: "oops",
-  FADE_LAST: "fadelast",
-  HIGHLIGHT: "highlight",
-  COUNTDOWN: "countdown",
+  NICK: "/nick",
+  HIGHLIGHT: "/highlight",
+  OOPS: "/oops",
+  FADE_LAST: "/fadelast",
+  HIGHLIGHT: "/highlight",
+  COUNTDOWN: "/countdown",
 };
 
 export const chatCommandsList = [
@@ -15,3 +15,11 @@ export const chatCommandsList = [
     onSuccess: changeOwnNick,
   },
 ];
+
+export const findExecutedCommand = (command = "") => {
+  const executedCommand = chatCommandsList.find((c) => {
+    return command.startsWith(c.command);
+  });
+
+  return executedCommand;
+};

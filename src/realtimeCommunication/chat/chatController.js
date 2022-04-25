@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import * as socketConnection from "../socketConnection";
 import store from "../../store/store";
 import { setChatHistory } from "../../MessengerPage/messengerSlice";
+import { findExecutedCommand } from "./chatCommands/chatCommands";
+import messengerMessages from "../../MessengerPage/MessengerPage.messages";
 
 export const messagesTypes = {
   RECEIVED: "RECEIVED",
@@ -21,15 +23,25 @@ export const getMessageTypesInArray = () => {
 
 export const processNewChatMessage = ({ messageContent, socketId }) => {
   if (messageContent.startsWith("/")) {
-    processNewChatCommand(messageContent);
+    processNewChatCommand(messageContent, socketId);
   } else {
     processSendingChatMessage(messageContent, socketId);
   }
 };
 
-const processNewChatCommand = (messageContent = "") => {
-  // TODO
-  // chat commands
+const processNewChatCommand = (messageContent = "", socketId) => {
+  const commandDetails = findExecutedCommand(messageContent);
+
+  if (!commandDetails) {
+    addMessageToStore({
+      newMessage: {
+        id: uuidv4(),
+        content: messengerMessages.invalidCommand,
+      },
+      chatHistorySocketId: socketId,
+      messageType: messagesTypes.WARNING,
+    });
+  }
 };
 
 const processSendingChatMessage = (messageContent, receiverSocketId) => {
