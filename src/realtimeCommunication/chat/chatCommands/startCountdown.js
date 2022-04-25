@@ -5,11 +5,11 @@ import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 import store from "../../../store/store";
 import { validateSeconds, validateUrl } from "../../../shared/utils/validators";
 import { setCountdownDetails } from "../../../MessengerPage/messengerSlice";
+import * as socketConnection from "../../socketConnection";
 
 const validateCountdownCommand = (command) => {
   if (command.startsWith("/countdown ")) {
     const commandParts = command.split(" ");
-    console.log(commandParts);
 
     if (commandParts.length !== 3)
       return {
@@ -65,7 +65,6 @@ const addCountdownAlreadyStartedMessage = (receiverSocketId) => {
 };
 
 const proceedToCountdown = ({ receiverSocketId, amountOfSeconds, url }) => {
-  // start local countdown
   store.dispatch(
     setCountdownDetails({
       amountOfSeconds,
@@ -73,7 +72,13 @@ const proceedToCountdown = ({ receiverSocketId, amountOfSeconds, url }) => {
     })
   );
 
-  // emit to seconds user that he should start countdown
+  socketConnection.sendCountdownDetails({
+    receiverSocketId,
+    countdownDetails: {
+      amountOfSeconds,
+      url,
+    },
+  });
 };
 
 export default startCountdown;

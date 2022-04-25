@@ -2,6 +2,7 @@ import io from "socket.io-client";
 import store from "../store/store";
 
 import { setOwnSocketId } from "./realtimeCommunicationSlice";
+import { setCountdownDetails } from "../MessengerPage/messengerSlice";
 import * as onlineUsersController from "./onlineUsers/onlineUsersController";
 import * as chatController from "./chat/chatController";
 
@@ -17,6 +18,8 @@ export const connectWithSocketIOServer = () => {
   socket.on("chat-message", chatMessageEventHandler);
 
   socket.on("chat-message-undo", chatMessageUndoEventHandler);
+
+  socket.on("countdown", countdownHandler);
 };
 
 export const sendNewChatMessage = (data) => {
@@ -29,6 +32,10 @@ export const sendNickChange = (data) => {
 
 export const sendUndoMessage = (data) => {
   socket.emit("chat-message-undo", data);
+};
+
+export const sendCountdownDetails = (data) => {
+  socket.emit("countdown", data);
 };
 
 const connectEventHandler = () => {
@@ -55,4 +62,12 @@ const chatMessageUndoEventHandler = (chatMessageUndoData) => {
     chatHistorySocketId: chatMessageUndoData.senderSocketId,
     messageId: chatMessageUndoData.messageId,
   });
+};
+
+const countdownHandler = (countdownData) => {
+  const countdownDetails = store.getState().messenger.countdownDetails;
+
+  if (!countdownDetails) {
+    store.dispatch(setCountdownDetails(countdownData));
+  }
 };
