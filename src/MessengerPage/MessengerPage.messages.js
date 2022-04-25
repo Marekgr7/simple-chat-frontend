@@ -15,6 +15,10 @@ const messages = {
   noMessageExistsToFade: "There is no message which we can fade ..",
   noMessageExistsToHighlight:
     "That message not exists. Please double check your command ..",
+  wrongCountdownCommand:
+    "It seems that you have tried to start countdown. Check once again command guide ...",
+  countdownAlreadyStarted:
+    "Countdown already started. You will be redirected soon ...",
   defaultMyNick: "Stranger",
 };
 
