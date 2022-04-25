@@ -107,7 +107,7 @@ export const addMessageToStore = ({
   }
 };
 
-export const removeLastMessageOfSpecifTypeFromLocalStore = ({
+export const removeLastMessageOfSpecificType = ({
   chatHistorySocketId,
   type,
 }) => {
@@ -130,5 +130,22 @@ export const removeLastMessageOfSpecifTypeFromLocalStore = ({
         chatHistorySocketId: chatHistorySocketId,
       })
     );
+
+    socketConnection.sendUndoMessage({
+      messageId: lastMessageOfSpecificType.id,
+      receiverSocketId: chatHistorySocketId,
+    });
   }
+};
+
+export const removeSpecificMessageFromLocalStore = ({
+  messageId,
+  chatHistorySocketId,
+}) => {
+  store.dispatch(
+    removeSpecificMessage({
+      messageId,
+      chatHistorySocketId,
+    })
+  );
 };

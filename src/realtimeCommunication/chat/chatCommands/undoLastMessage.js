@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   addMessageToStore,
   messagesTypes,
-  removeLastMessageOfSpecifTypeFromLocalStore,
+  removeLastMessageOfSpecificType,
 } from "../chatController";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 import store from "../../../store/store";
@@ -25,7 +25,7 @@ const findIfAnyMessageWasSentByMeToSpecificUser = (receiverSocketId) => {
 };
 
 const processUndoLastMessage = (receiverSocketId) => {
-  removeLastMessageOfSpecifTypeFromLocalStore({
+  removeLastMessageOfSpecificType({
     chatHistorySocketId: receiverSocketId,
     type: messagesTypes.CREATED,
   });

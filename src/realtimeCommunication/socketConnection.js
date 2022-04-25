@@ -22,12 +22,17 @@ export const connectWithSocketIOServer = () => {
   });
 
   socket.on("chat-message", (chatMessageData) => {
-    console.log(chatMessageData);
-
     chatController.addMessageToStore({
       chatHistorySocketId: chatMessageData.senderSocketId,
       messageType: chatController.messagesTypes.RECEIVED,
       newMessage: chatMessageData.message,
+    });
+  });
+
+  socket.on("chat-message-undo", (data) => {
+    chatController.removeSpecificMessageFromLocalStore({
+      chatHistorySocketId: data.senderSocketId,
+      messageId: data.messageId,
     });
   });
 };
@@ -38,4 +43,8 @@ export const sendNewChatMessage = (data) => {
 
 export const sendNickChange = (data) => {
   socket.emit("nick-change", data);
+};
+
+export const sendUndoMessage = (data) => {
+  socket.emit("chat-message-undo", data);
 };
