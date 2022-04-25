@@ -26,10 +26,20 @@ const MessagesContainer = ({ chatMessages }) => {
   return (
     <Wrapper>
       {chatMessages.map((m) => {
+        const additionalStyles = m.additionalStyles || {};
         return m.type === messagesTypes.WARNING ? (
-          <WarningMessage key={m.id} content={m.content} />
+          <WarningMessage
+            key={m.id}
+            content={m.content}
+            additionalStyles={additionalStyles}
+          />
         ) : (
-          <SingleMessage key={m.id} content={m.content} type={m.type} />
+          <SingleMessage
+            key={m.id}
+            content={m.content}
+            type={m.type}
+            additionalStyles={additionalStyles}
+          />
         );
       })}
       <div ref={scrollRef} />

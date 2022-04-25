@@ -35,13 +35,13 @@ const MessageRight = styled.p`
   max-width: 80%;
 `;
 
-const SingleMessage = ({ type, content }) => {
+const SingleMessage = ({ type, content, additionalStyles }) => {
   return (
     <Wrapper type={type}>
       {type === messagesTypes.CREATED ? (
-        <MessageRight>{content}</MessageRight>
+        <MessageRight style={additionalStyles}>{content}</MessageRight>
       ) : (
-        <MessageLeft>{content}</MessageLeft>
+        <MessageLeft style={additionalStyles}>{content}</MessageLeft>
       )}
     </Wrapper>
   );
@@ -50,6 +50,7 @@ const SingleMessage = ({ type, content }) => {
 SingleMessage.propTypes = {
   type: PropTypes.oneOf(getMessageTypesInArray()).isRequired,
   content: PropTypes.string.isRequired,
+  additionalStyles: PropTypes.object.isRequired,
 };
 
 export default SingleMessage;

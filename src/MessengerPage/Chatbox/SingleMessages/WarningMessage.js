@@ -14,16 +14,17 @@ const WarningBox = styled.p`
   font-weight: bold;
 `;
 
-const WarningMessage = ({ content }) => {
+const WarningMessage = ({ content, additionalStyles }) => {
   return (
     <Wrapper>
-      <WarningBox>{content}</WarningBox>
+      <WarningBox style={additionalStyles}>{content}</WarningBox>
     </Wrapper>
   );
 };
 
 WarningMessage.propTypes = {
   content: PropTypes.string.isRequired,
+  additionalStyles: PropTypes.object.isRequired,
 };
 
 export default WarningMessage;
