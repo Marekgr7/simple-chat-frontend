@@ -1,5 +1,6 @@
 import changeOwnNick from "./changeOwnNick";
 import undoLastMessage from "./undoLastMessage";
+import fadeLastMessage from "./fadeLastMessage";
 
 const chatCommands = {
   NICK: "/nick",
@@ -17,6 +18,10 @@ export const chatCommandsList = [
   {
     command: chatCommands.OOPS,
     onSuccess: undoLastMessage,
+  },
+  {
+    command: chatCommands.FADE_LAST,
+    onSuccess: fadeLastMessage,
   },
 ];
 

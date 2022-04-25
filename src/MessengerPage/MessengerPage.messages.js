@@ -6,8 +6,11 @@ const messages = {
     "It seems that you have tried to change nick. Check once again command guide ..",
   invalidUndoLastMessageCommand:
     "It seems that you have tried to undo last message. To undo last message just type /oops",
+  invalidFadeLastMessageCommand:
+    "It seems that you have tried to fade last message. Just type /fadelast",
   noMessageExistsToUndo:
-    "It seems that that you need first to write a message before trying to undo the last message ..",
+    "It seems that you need first to write a message before trying to undo the last message ..",
+  noMessageExistsToFade: "There is no message which we can fade ..",
   defaultMyNick: "Stranger",
 };
 
