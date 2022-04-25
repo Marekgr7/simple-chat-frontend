@@ -41,6 +41,12 @@ const processNewChatCommand = (messageContent = "", socketId) => {
       chatHistorySocketId: socketId,
       messageType: messagesTypes.WARNING,
     });
+  } else {
+    // execute successCallback related with specific command
+    commandDetails.onSuccess({
+      receiverSocketId: socketId,
+      command: messageContent,
+    });
   }
 };
 
