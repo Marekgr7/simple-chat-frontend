@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { useSelector } from "react-redux";
 import MessengerPage from "./MessengerPage/MessengerPage";
 import { connectWithSocketIOServer } from "./realtimeCommunication/socketConnection";
+import CountdownTimer from "./shared/components/CountdownTimer";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,6 +11,10 @@ const Wrapper = styled.div`
 `;
 
 function App() {
+  const countdownDetails = useSelector(
+    (state) => state.messenger.countdownDetails
+  );
+
   useEffect(() => {
     connectWithSocketIOServer();
   }, []);
@@ -17,6 +22,9 @@ function App() {
   return (
     <Wrapper>
       <MessengerPage />
+      {countdownDetails && (
+        <CountdownTimer countdownDetails={countdownDetails} />
+      )}
     </Wrapper>
   );
 }
