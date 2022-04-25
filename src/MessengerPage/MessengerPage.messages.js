@@ -20,6 +20,15 @@ const messages = {
   countdownAlreadyStarted:
     "Countdown already started. You will be redirected soon ...",
   defaultMyNick: "Stranger",
+  undoLastMessageCommandDescription: "Undo last sent message",
+  nickChangeCommandDescription:
+    "Changes your nickname (Between 3 and 8 characters, no spaces allowed)",
+  fadeLastCommandDescription: "Fade the last message in chat",
+  highlightMessageCommandDescription:
+    "Highlights specific messages. After command provide message which you would like to highlight. For example: '/highlight hello'",
+  countdownCommandDescription:
+    "Starts a countdown timer which will redirect you to specified URL",
+  commands: "Commands:",
 };
 
 export default messages;

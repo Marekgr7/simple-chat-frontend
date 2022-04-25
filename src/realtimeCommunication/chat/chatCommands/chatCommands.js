@@ -4,7 +4,7 @@ import fadeLastMessage from "./fadeLastMessage";
 import highlightMessage from "./highlightMessage";
 import startCountdown from "./startCountdown";
 
-const chatCommands = {
+export const chatCommands = {
   NICK: "/nick",
   HIGHLIGHT: "/highlight",
   OOPS: "/oops",

@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: ${(props) => props.justifyContent || "center"};
 `;
 
 const Title = styled.h1`
@@ -14,9 +14,9 @@ const Title = styled.h1`
   font-size: ${(props) => props.fontSize || "2em"};
 `;
 
-const Label = ({ fontSize, text }) => {
+const Label = ({ fontSize, text, justifyContent }) => {
   return (
-    <Wrapper>
+    <Wrapper justifyContent={justifyContent}>
       <Title fontSize={fontSize}>{text}</Title>
     </Wrapper>
   );
@@ -25,6 +25,7 @@ const Label = ({ fontSize, text }) => {
 Label.propTypes = {
   text: PropTypes.string.isRequired,
   fontSize: PropTypes.string,
+  justifyContent: PropTypes.string,
 };
 
 export default Label;
