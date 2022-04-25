@@ -49,6 +49,7 @@ export const initialState = {
   onlineUsers: [],
   chatHistory: [],
   myNick: messages.defaultMyNick,
+  countdownDetails: null,
 };
 
 export const messengerSlice = createSlice({
@@ -96,6 +97,9 @@ export const messengerSlice = createSlice({
         additionalStyles,
       };
     },
+    setCountdownDetails: (state, action) => {
+      state.countdownDetails = action.payload;
+    },
   },
 });
 
@@ -105,6 +109,7 @@ export const {
   setMyNick,
   removeSpecificMessage,
   setSpecificMessageAdditionalStyles,
+  setCountdownDetails,
 } = messengerSlice.actions;
 
 export default messengerSlice.reducer;

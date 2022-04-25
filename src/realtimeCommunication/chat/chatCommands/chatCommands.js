@@ -2,6 +2,7 @@ import changeOwnNick from "./changeOwnNick";
 import undoLastMessage from "./undoLastMessage";
 import fadeLastMessage from "./fadeLastMessage";
 import highlightMessage from "./highlightMessage";
+import startCountdown from "./startCountdown";
 
 const chatCommands = {
   NICK: "/nick",
@@ -27,6 +28,10 @@ export const chatCommandsList = [
   {
     command: chatCommands.HIGHLIGHT,
     onSuccess: highlightMessage,
+  },
+  {
+    command: chatCommands.COUNTDOWN,
+    onSuccess: startCountdown,
   },
 ];
 
