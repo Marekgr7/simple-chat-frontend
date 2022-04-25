@@ -35,3 +35,7 @@ export const connectWithSocketIOServer = () => {
 export const sendNewChatMessage = (data) => {
   socket.emit("chat-message", data);
 };
+
+export const sendNickChange = (data) => {
+  socket.emit("nick-change", data);
+};

@@ -5,6 +5,7 @@ import { validateNick } from "../../../shared/utils/validators";
 import { addMessageToStore, messagesTypes } from "../chatController";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 import { setMyNick } from "../../../MessengerPage/messengerSlice";
+import * as socketConnection from "../../socketConnection";
 
 const validateNickCommand = (command = "") => {
   if (command.startsWith("/nick ")) {
@@ -26,6 +27,7 @@ const changeOwnNick = ({ command, receiverSocketId }) => {
 
   if (isValid) {
     store.dispatch(setMyNick(nick));
+    socketConnection.sendNickChange({ nick });
   } else {
     addMessageToStore({
       newMessage: {
