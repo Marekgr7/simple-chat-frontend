@@ -2,7 +2,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import * as socketConnection from "../socketConnection";
 import store from "../../store/store";
-import { setChatHistory } from "../../MessengerPage/messengerSlice";
+import {
+  setChatHistory,
+  removeSpecificMessage,
+} from "../../MessengerPage/messengerSlice";
 import { findExecutedCommand } from "./chatCommands/chatCommands";
 import messengerMessages from "../../MessengerPage/MessengerPage.messages";
 
@@ -101,5 +104,31 @@ export const addMessageToStore = ({
     };
 
     store.dispatch(setChatHistory([...chatHistory, newSpecificChatHistory]));
+  }
+};
+
+export const removeLastMessageOfSpecifTypeFromLocalStore = ({
+  chatHistorySocketId,
+  type,
+}) => {
+  const specificChatHistory = store
+    .getState()
+    .messenger.chatHistory.find(
+      (history) => history.socketId === chatHistorySocketId
+    );
+
+  if (specificChatHistory) {
+    const reversedMessages = [...specificChatHistory.messages].reverse();
+
+    const lastMessageOfSpecificType = reversedMessages.find(
+      (m) => m.type === type
+    );
+
+    store.dispatch(
+      removeSpecificMessage({
+        messageId: lastMessageOfSpecificType.id,
+        chatHistorySocketId: chatHistorySocketId,
+      })
+    );
   }
 };

@@ -64,10 +64,25 @@ export const messengerSlice = createSlice({
     setMyNick: (state, action) => {
       state.myNick = action.payload;
     },
+    removeSpecificMessage: (state, action) => {
+      const { messageId, chatHistorySocketId } = action.payload;
+      const specificChatHistory = state.chatHistory.find(
+        (history) => history.socketId === chatHistorySocketId
+      );
+      if (!specificChatHistory) return state;
+
+      specificChatHistory.messages = specificChatHistory.messages.filter(
+        (m) => m.id !== messageId
+      );
+    },
   },
 });
 
-export const { setOnlineUsers, setChatHistory, setMyNick } =
-  messengerSlice.actions;
+export const {
+  setOnlineUsers,
+  setChatHistory,
+  setMyNick,
+  removeSpecificMessage,
+} = messengerSlice.actions;
 
 export default messengerSlice.reducer;
