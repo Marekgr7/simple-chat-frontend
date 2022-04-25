@@ -27,11 +27,11 @@ const Chatboxes = styled.div`
 `;
 
 const MessengerPage = () => {
-  const onlineUsers = useSelector((state) => state.messenger.onlineUsers);
+  const { onlineUsers, myNick } = useSelector((state) => state.messenger);
 
   return (
     <Wrapper>
-      <Label text={messages.title} />
+      <Label text={`${messages.title} ${myNick}`} />
       <Chatboxes>
         <TransitionGroup component={null}>
           {onlineUsers.map((user) => (

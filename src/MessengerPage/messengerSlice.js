@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { messagesTypes } from "../realtimeCommunication/chat/chatController";
+import messages from "./MessengerPage.messages";
 
 // export const DUMMY_ONLINE_USERS = [
 //   {
@@ -48,7 +48,7 @@ import { messagesTypes } from "../realtimeCommunication/chat/chatController";
 export const initialState = {
   onlineUsers: [],
   chatHistory: [],
-  nickname: null,
+  myNick: messages.defaultMyNick,
 };
 
 export const messengerSlice = createSlice({
@@ -61,9 +61,13 @@ export const messengerSlice = createSlice({
     setChatHistory: (state, action) => {
       state.chatHistory = action.payload;
     },
+    setMyNick: (state, action) => {
+      state.myNick = action.payload;
+    },
   },
 });
 
-export const { setOnlineUsers, setChatHistory } = messengerSlice.actions;
+export const { setOnlineUsers, setChatHistory, setMyNick } =
+  messengerSlice.actions;
 
 export default messengerSlice.reducer;

@@ -1,7 +1,10 @@
+import { v4 as uuidv4 } from "uuid";
+
+import store from "../../../store/store";
 import { validateNick } from "../../../shared/utils/validators";
 import { addMessageToStore, messagesTypes } from "../chatController";
-import { v4 as uuidv4 } from "uuid";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
+import { setMyNick } from "../../../MessengerPage/messengerSlice";
 
 const validateNickCommand = (command = "") => {
   if (command.startsWith("/nick ")) {
@@ -22,6 +25,7 @@ const changeOwnNick = ({ command, receiverSocketId }) => {
   const { isValid, nick } = validateNickCommand(command);
 
   if (isValid) {
+    store.dispatch(setMyNick(nick));
   } else {
     addMessageToStore({
       newMessage: {
