@@ -10,31 +10,13 @@ let socket = null;
 export const connectWithSocketIOServer = () => {
   socket = io("http://localhost:3003");
 
-  socket.on("connect", () => {
-    store.dispatch(setOwnSocketId(socket.id));
-  });
+  socket.on("connect", connectEventHandler);
 
-  socket.on("online-users", (onlineUsersData) => {
-    onlineUsersController.setOnlineUsersExcludingMyself(
-      onlineUsersData,
-      socket.id
-    );
-  });
+  socket.on("online-users", onlineUsersEventHandler);
 
-  socket.on("chat-message", (chatMessageData) => {
-    chatController.addMessageToStore({
-      chatHistorySocketId: chatMessageData.senderSocketId,
-      messageType: chatController.messagesTypes.RECEIVED,
-      newMessage: chatMessageData.message,
-    });
-  });
+  socket.on("chat-message", chatMessageEventHandler);
 
-  socket.on("chat-message-undo", (data) => {
-    chatController.removeSpecificMessageFromLocalStore({
-      chatHistorySocketId: data.senderSocketId,
-      messageId: data.messageId,
-    });
-  });
+  socket.on("chat-message-undo", chatMessageUndoEventHandler);
 };
 
 export const sendNewChatMessage = (data) => {
@@ -47,4 +29,30 @@ export const sendNickChange = (data) => {
 
 export const sendUndoMessage = (data) => {
   socket.emit("chat-message-undo", data);
+};
+
+const connectEventHandler = () => {
+  store.dispatch(setOwnSocketId(socket.id));
+};
+
+const onlineUsersEventHandler = (onlineUsersData) => {
+  onlineUsersController.setOnlineUsersExcludingMyself(
+    onlineUsersData,
+    socket.id
+  );
+};
+
+const chatMessageEventHandler = (chatMessageData) => {
+  chatController.addMessageToStore({
+    chatHistorySocketId: chatMessageData.senderSocketId,
+    messageType: chatController.messagesTypes.RECEIVED,
+    newMessage: chatMessageData.message,
+  });
+};
+
+const chatMessageUndoEventHandler = (chatMessageUndoData) => {
+  chatController.removeSpecificMessageFromLocalStore({
+    chatHistorySocketId: chatMessageUndoData.senderSocketId,
+    messageId: chatMessageUndoData.messageId,
+  });
 };
