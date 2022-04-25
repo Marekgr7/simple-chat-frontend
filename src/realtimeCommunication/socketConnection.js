@@ -1,25 +1,25 @@
 import io from "socket.io-client";
-import store from "../store/store";
 
-import { setOwnSocketId } from "./realtimeCommunicationSlice";
-import { setCountdownDetails } from "../MessengerPage/messengerSlice";
-import * as onlineUsersController from "./onlineUsers/onlineUsersController";
-import * as chatController from "./chat/chatController";
+import chatMessageEventHandler from "./socketConnectionHandlers/chatMessageEventHandler";
+import chatMessageUndoEventHandler from "./socketConnectionHandlers/chatMessageUndoEventHandler";
+import connectEventHandler from "./socketConnectionHandlers/connectEventHandler";
+import countdownEventHandler from "./socketConnectionHandlers/countdownEventHandler";
+import onlineUsersEventHandler from "./socketConnectionHandlers/onlineUsersEventHandler";
 
 let socket = null;
 
 export const connectWithSocketIOServer = () => {
   socket = io("http://localhost:3003");
 
-  socket.on("connect", connectEventHandler);
+  socket.on("connect", () => connectEventHandler(socket.id));
 
-  socket.on("online-users", onlineUsersEventHandler);
+  socket.on("online-users", (data) => onlineUsersEventHandler(data, socket.id));
 
   socket.on("chat-message", chatMessageEventHandler);
 
   socket.on("chat-message-undo", chatMessageUndoEventHandler);
 
-  socket.on("countdown", countdownHandler);
+  socket.on("countdown", countdownEventHandler);
 };
 
 export const sendNewChatMessage = (data) => {
@@ -36,38 +36,4 @@ export const sendUndoMessage = (data) => {
 
 export const sendCountdownDetails = (data) => {
   socket.emit("countdown", data);
-};
-
-const connectEventHandler = () => {
-  store.dispatch(setOwnSocketId(socket.id));
-};
-
-const onlineUsersEventHandler = (onlineUsersData) => {
-  onlineUsersController.setOnlineUsersExcludingMyself(
-    onlineUsersData,
-    socket.id
-  );
-};
-
-const chatMessageEventHandler = (chatMessageData) => {
-  chatController.addMessageToStore({
-    chatHistorySocketId: chatMessageData.senderSocketId,
-    messageType: chatController.messagesTypes.RECEIVED,
-    newMessage: chatMessageData.message,
-  });
-};
-
-const chatMessageUndoEventHandler = (chatMessageUndoData) => {
-  chatController.removeSpecificMessageFromLocalStore({
-    chatHistorySocketId: chatMessageUndoData.senderSocketId,
-    messageId: chatMessageUndoData.messageId,
-  });
-};
-
-const countdownHandler = (countdownData) => {
-  const countdownDetails = store.getState().messenger.countdownDetails;
-
-  if (!countdownDetails) {
-    store.dispatch(setCountdownDetails(countdownData));
-  }
 };
