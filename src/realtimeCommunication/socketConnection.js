@@ -5,6 +5,7 @@ import chatMessageUndoEventHandler from "./socketConnectionHandlers/chatMessageU
 import connectEventHandler from "./socketConnectionHandlers/connectEventHandler";
 import countdownEventHandler from "./socketConnectionHandlers/countdownEventHandler";
 import onlineUsersEventHandler from "./socketConnectionHandlers/onlineUsersEventHandler";
+import disconnectedUserEventHandler from "./socketConnectionHandlers/disconnectedUserEventHandler";
 
 let socket = null;
 
@@ -12,6 +13,8 @@ export const connectWithSocketIOServer = () => {
   socket = io("http://localhost:3003");
 
   socket.on("connect", () => connectEventHandler(socket.id));
+
+  socket.on("disconnected-user", (data) => disconnectedUserEventHandler(data));
 
   socket.on("online-users", (data) => onlineUsersEventHandler(data, socket.id));
 
