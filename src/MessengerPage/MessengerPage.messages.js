@@ -10,15 +10,17 @@ const messages = {
     "It seems that you have tried to fade last message. Just type /fadelast",
   invalidHighlightMessageCommand:
     "It seems that you have tried to highlight specific message. Check once again command guide ..",
+  invalidThinkMessageCommand:
+    "It seems that you have tried to send think message. Check once again command guide ..",
   noMessageExistsToUndo:
     "It seems that you need first to write a message before trying to undo the last message ..",
   noMessageExistsToFade: "There is no message which we can fade ..",
   noMessageExistsToHighlight:
     "That message not exists. Please double check your command ..",
   wrongCountdownCommand:
-    "It seems that you have tried to start countdown. Check once again command guide ...",
+    "It seems that you have tried to start countdown. Check once again command guide ..",
   countdownAlreadyStarted:
-    "Countdown already started. You will be redirected soon ...",
+    "Countdown already started. You will be redirected soon ..",
   defaultMyNick: "Stranger",
   undoLastMessageCommandDescription: "Undo last sent message",
   nickChangeCommandDescription:

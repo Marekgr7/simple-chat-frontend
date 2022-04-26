@@ -53,10 +53,15 @@ const processNewChatCommand = (messageContent = "", socketId) => {
   }
 };
 
-const processSendingChatMessage = (messageContent, receiverSocketId) => {
+export const processSendingChatMessage = (
+  messageContent,
+  receiverSocketId,
+  additionalStyles = {}
+) => {
   const newMessage = {
     id: uuidv4(),
     content: messageContent,
+    additionalStyles,
   };
 
   addMessageToStore({

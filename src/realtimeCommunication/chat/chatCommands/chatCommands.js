@@ -3,6 +3,7 @@ import undoLastMessage from "./undoLastMessage";
 import fadeLastMessage from "./fadeLastMessage";
 import highlightMessage from "./highlightMessage";
 import startCountdown from "./startCountdown";
+import thinkMessage from "./thinkMessage";
 
 export const chatCommands = {
   NICK: "/nick",
@@ -10,6 +11,7 @@ export const chatCommands = {
   OOPS: "/oops",
   FADE_LAST: "/fadelast",
   COUNTDOWN: "/countdown",
+  THINK: "/think",
 };
 
 export const chatCommandsList = [
@@ -32,6 +34,10 @@ export const chatCommandsList = [
   {
     command: chatCommands.COUNTDOWN,
     onSuccess: startCountdown,
+  },
+  {
+    command: chatCommands.THINK,
+    onSuccess: thinkMessage,
   },
 ];
 

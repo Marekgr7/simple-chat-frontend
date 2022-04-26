@@ -5,6 +5,7 @@ const chatMessageEventHandler = (chatMessageData) => {
     chatHistorySocketId: chatMessageData.senderSocketId,
     messageType: chatController.messagesTypes.RECEIVED,
     newMessage: chatMessageData.message,
+    additionalStyles: chatMessageData.additionalStyles,
   });
 };
 
