@@ -1,14 +1,30 @@
 import React from "react";
-import { screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import user from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
+
 import { renderWithContext } from "../testUtils";
 import messages from "./MessengerPage.messages";
 import MessengerPage from "./MessengerPage";
-import { setOnlineUsers } from "../MessengerPage/messengerSlice";
+import {
+  setOnlineUsers,
+  setChatHistory,
+} from "../MessengerPage/messengerSlice";
 import { DUMMY_ONLINE_USERS } from "../MessengerPage/messengerSlice.dummy";
+import { messagesTypes } from "../realtimeCommunication/chat/chatController";
 
 const defaultNick = "Stranger";
+
+const singleOnlineUser = {
+  socketId: "123",
+  nick: "Test",
+};
+
+const singleMessage = {
+  id: "12334",
+  content: "test message",
+  type: messagesTypes.CREATED,
+};
 
 describe("rendering MessengerPage", () => {
   it("renders initial MessengerPage component", () => {
@@ -52,6 +68,52 @@ describe("rendering MessengerPage", () => {
       expect(chatboxInputsAfterResettingState.length).toBe(0);
     }, [1000]);
   });
+
+  it("chatbox input value changes when user is typing", () => {
+    const { store } = renderWithContext(<MessengerPage />);
+
+    act(() => {
+      store.dispatch(setOnlineUsers([singleOnlineUser]));
+    });
+
+    const chatboxNewMessageInputs = getChatboxesNewMessageInputs();
+
+    expect(chatboxNewMessageInputs.length).toBe(1);
+
+    const singleChatboxInput = chatboxNewMessageInputs[0];
+
+    userEvent.type(singleChatboxInput, "Hello");
+
+    waitFor(() => {
+      expect(singleChatboxInput.value).toBe("Hello");
+    });
+  });
+
+  it("chatbox renders message after setting chatHistory ", () => {
+    const { store } = renderWithContext(<MessengerPage />);
+
+    act(() => {
+      store.dispatch(setOnlineUsers([singleOnlineUser]));
+    });
+
+    const chatboxNewMessageInputs = getChatboxesNewMessageInputs();
+
+    expect(chatboxNewMessageInputs.length).toBe(1);
+
+    act(() => {
+      store.dispatch(
+        setChatHistory([
+          {
+            socketId: singleOnlineUser.socketId,
+            messages: [singleMessage],
+          },
+        ])
+      );
+    });
+
+    const chatboxMessage = getChatboxMessageByText(singleMessage.content);
+    expect(chatboxMessage.innerHTML).toBe(singleMessage.content);
+  });
 });
 
 const getInitialTitleLabel = () => {
@@ -66,4 +128,8 @@ const getChatboxesNewMessageInputs = () => {
   return screen.getAllByPlaceholderText(`${messages.newMessagePlaceholder}`, {
     exact: false,
   });
+};
+
+const getChatboxMessageByText = (messageText) => {
+  return screen.getByText(messageText);
 };
