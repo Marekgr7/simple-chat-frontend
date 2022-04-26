@@ -1,7 +1,7 @@
 const nickRegexPattern = /^[a-zA-Z]{3,8}$/;
 const secondsRegexPattern = /^\d+$/;
 const urlRegexPattern =
-  /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/;
+  /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 
 export const validateNick = (nick = "") => {
   return nickRegexPattern.test(nick);

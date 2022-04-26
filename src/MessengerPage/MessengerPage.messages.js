@@ -29,7 +29,7 @@ const messages = {
   highlightMessageCommandDescription:
     "Highlights specific existing messages. After command provide message which you would like to highlight. For example: '/highlight hello'",
   countdownCommandDescription:
-    "Starts a countdown timer which will redirect you to specified URL",
+    "Starts a countdown timer which will redirect you to specified URL. URL should include protocol prefix (http, https, ftp)",
   thinkCommandDescription:
     "Type /think before message which you would like to send. It will appear in grey color. For example: '/think hello mate'",
   commands: "Commands:",
