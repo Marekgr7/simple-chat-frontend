@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
+import { validateIfStringIncludesOnlySpaces } from "../../../shared/utils/validators";
 import * as chatController from "../chatController";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 
@@ -12,7 +13,9 @@ const validateThinkCommand = (command = "") => {
     const messageContent = command.slice(7, command.length);
 
     return {
-      isValid: messageContent.length > 0,
+      isValid:
+        messageContent.length > 0 &&
+        !validateIfStringIncludesOnlySpaces(messageContent),
       messageContent,
     };
   }

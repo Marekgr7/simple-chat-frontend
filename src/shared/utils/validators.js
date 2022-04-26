@@ -14,3 +14,7 @@ export const validateSeconds = (seconds = "") => {
 export const validateUrl = (url = "") => {
   return urlRegexPattern.test(url);
 };
+
+export const validateIfStringIncludesOnlySpaces = (str = "") => {
+  return str.trim().length === 0;
+};

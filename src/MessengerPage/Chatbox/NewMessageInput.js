@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-
+import { validateIfStringIncludesOnlySpaces } from "../../shared/utils/validators";
 import messages from "../MessengerPage.messages";
 import * as chatController from "../../realtimeCommunication/chat/chatController";
 
@@ -39,7 +39,11 @@ const NewMessageInput = ({ socketId }) => {
   );
 
   const handleKeyPressed = (event) => {
-    if (event.code === "Enter" && message.length > 0) {
+    if (
+      event.code === "Enter" &&
+      message.length > 0 &&
+      !validateIfStringIncludesOnlySpaces(message)
+    ) {
       proceedChatMessage();
       setMessage("");
     }
