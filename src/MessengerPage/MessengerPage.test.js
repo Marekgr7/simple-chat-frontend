@@ -31,6 +31,27 @@ describe("rendering MessengerPage", () => {
     const chatboxInputs = getChatboxesNewMessageInputs();
     expect(chatboxInputs.length).toBe(DUMMY_ONLINE_USERS.length);
   });
+
+  it("render chatboxes after setting in store online users and removes them after resetting online users", () => {
+    const { store } = renderWithContext(<MessengerPage />);
+
+    act(() => {
+      store.dispatch(setOnlineUsers(DUMMY_ONLINE_USERS));
+    });
+
+    const chatboxInputs = getChatboxesNewMessageInputs();
+    expect(chatboxInputs.length).toBe(DUMMY_ONLINE_USERS.length);
+
+    act(() => {
+      store.dispatch(setOnlineUsers([]));
+    });
+
+    // awating for animation end when removing chatboxes
+    setTimeout(() => {
+      const chatboxInputsAfterResettingState = getChatboxesNewMessageInputs();
+      expect(chatboxInputsAfterResettingState.length).toBe(0);
+    }, [1000]);
+  });
 });
 
 const getInitialTitleLabel = () => {
