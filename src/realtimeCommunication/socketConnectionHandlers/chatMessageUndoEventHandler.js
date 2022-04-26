@@ -1,7 +1,7 @@
-import * as chatController from "../chat/chatController";
+import removeSpecificMessageFromLocalStore from "../../realtimeCommunication/chat/chatStoreActions/removeSpecificMessageFromLocalStore";
 
 const chatMessageUndoEventHandler = (chatMessageUndoData) => {
-  chatController.removeSpecificMessageFromLocalStore({
+  removeSpecificMessageFromLocalStore({
     chatHistorySocketId: chatMessageUndoData.senderSocketId,
     messageId: chatMessageUndoData.messageId,
   });

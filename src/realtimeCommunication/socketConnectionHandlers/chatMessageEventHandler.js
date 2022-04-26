@@ -1,9 +1,10 @@
-import * as chatController from "../chat/chatController";
+import addMessageToStore from "../../realtimeCommunication/chat/chatStoreActions/addMessageToStore";
+import { messagesTypes } from "../chat/chatController";
 
 const chatMessageEventHandler = (chatMessageData) => {
-  chatController.addMessageToStore({
+  addMessageToStore({
     chatHistorySocketId: chatMessageData.senderSocketId,
-    messageType: chatController.messagesTypes.RECEIVED,
+    messageType: messagesTypes.RECEIVED,
     newMessage: chatMessageData.message,
     additionalStyles: chatMessageData.additionalStyles,
   });

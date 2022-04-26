@@ -1,13 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 
 import * as socketConnection from "../socketConnection";
-import store from "../../store/store";
-import {
-  setChatHistory,
-  removeSpecificMessage,
-} from "../../MessengerPage/messengerSlice";
 import { findExecutedCommand } from "./chatCommands/chatCommands";
 import messengerMessages from "../../MessengerPage/MessengerPage.messages";
+import addMessageToStore from "./chatStoreActions/addMessageToStore";
 
 export const messagesTypes = {
   RECEIVED: "RECEIVED",
@@ -72,84 +68,4 @@ export const processSendingChatMessage = (
     message: newMessage,
     receiverSocketId,
   });
-};
-
-export const addMessageToStore = ({
-  newMessage,
-  chatHistorySocketId,
-  messageType,
-}) => {
-  const chatHistory = store.getState().messenger.chatHistory;
-  const specificUserIndex = chatHistory.findIndex(
-    (c) => c.socketId === chatHistorySocketId
-  );
-
-  const newStoreMessage = {
-    ...newMessage,
-    type: messageType,
-  };
-
-  if (specificUserIndex !== -1) {
-    let newChatHistory = [...chatHistory];
-
-    newChatHistory[specificUserIndex] = {
-      ...newChatHistory[specificUserIndex],
-      messages: [
-        ...newChatHistory[specificUserIndex].messages,
-        newStoreMessage,
-      ],
-    };
-
-    store.dispatch(setChatHistory(newChatHistory));
-  } else {
-    const newSpecificChatHistory = {
-      socketId: chatHistorySocketId,
-      messages: [newStoreMessage],
-    };
-
-    store.dispatch(setChatHistory([...chatHistory, newSpecificChatHistory]));
-  }
-};
-
-export const removeLastMessageOfSpecificType = ({
-  chatHistorySocketId,
-  type,
-}) => {
-  const specificChatHistory = store
-    .getState()
-    .messenger.chatHistory.find(
-      (history) => history.socketId === chatHistorySocketId
-    );
-
-  if (specificChatHistory) {
-    const reversedMessages = [...specificChatHistory.messages].reverse();
-
-    const lastMessageOfSpecificType = reversedMessages.find(
-      (m) => m.type === type
-    );
-
-    store.dispatch(
-      removeSpecificMessage({
-        messageId: lastMessageOfSpecificType.id,
-        chatHistorySocketId: chatHistorySocketId,
-      })
-    );
-
-    socketConnection.sendUndoMessage({
-      messageId: lastMessageOfSpecificType.id,
-      receiverSocketId: chatHistorySocketId,
-    });
-  }
-};
-
-export const removeSpecificMessageFromLocalStore = ({
-  messageId,
-  chatHistorySocketId,
-}) => {
-  store.dispatch(
-    removeSpecificMessage({
-      messageId,
-      chatHistorySocketId,
-    })
-  );
 };

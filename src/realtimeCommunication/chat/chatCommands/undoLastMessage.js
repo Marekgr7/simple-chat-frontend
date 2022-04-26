@@ -1,10 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 
-import {
-  addMessageToStore,
-  messagesTypes,
-  removeLastMessageOfSpecificType,
-} from "../chatController";
+import addMessageToStore from "../chatStoreActions/addMessageToStore";
+import removeLastMessageOfSpecificType from "../chatStoreActions/removeLastMessageOfSpecificType";
+import { messagesTypes } from "../chatController";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 import store from "../../../store/store";
 

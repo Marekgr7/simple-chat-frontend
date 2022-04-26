@@ -2,7 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 
 import store from "../../../store/store";
 import { validateNick } from "../../../shared/utils/validators";
-import { addMessageToStore, messagesTypes } from "../chatController";
+import { messagesTypes } from "../chatController";
+import addMessageToStore from "../../chat/chatStoreActions/addMessageToStore";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 import { setMyNick } from "../../../MessengerPage/messengerSlice";
 import * as socketConnection from "../../socketConnection";

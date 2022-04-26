@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { addMessageToStore, messagesTypes } from "../chatController";
+import addMessageToStore from "../chatStoreActions/addMessageToStore";
+import { messagesTypes } from "../chatController";
 import { setSpecificMessageAdditionalStyles } from "../../../MessengerPage/messengerSlice";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
 import store from "../../../store/store";

@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
+import addMessageToStore from "../chatStoreActions/addMessageToStore";
 import { validateIfStringIncludesOnlySpaces } from "../../../shared/utils/validators";
 import * as chatController from "../chatController";
 import messengerMessages from "../../../MessengerPage/MessengerPage.messages";
@@ -35,7 +36,7 @@ const thinkMessage = ({ command, receiverSocketId }) => {
       thinkMessageAdditionalStyles
     );
   } else {
-    chatController.addMessageToStore({
+    addMessageToStore({
       newMessage: {
         id: uuidv4(),
         content: messengerMessages.invalidThinkMessageCommand,
