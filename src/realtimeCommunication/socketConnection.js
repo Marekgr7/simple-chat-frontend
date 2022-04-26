@@ -10,7 +10,7 @@ import disconnectedUserEventHandler from "./socketConnectionHandlers/disconnecte
 let socket = null;
 
 export const connectWithSocketIOServer = () => {
-  socket = io("http://localhost:3003");
+  socket = io("https://kodify-chat-backend.herokuapp.com");
 
   socket.on("connect", () => connectEventHandler(socket.id));
 
