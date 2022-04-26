@@ -1,35 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import messages from "./MessengerPage.messages";
-
-// export const DUMMY_CHAT_HISTORY = [
-//   {
-//     socketId: "123",
-//     messages: [
-//       {
-//         id: 1,
-//         type: messagesTypes.CREATED,
-//         content: "Hello world",
-//       },
-//       {
-//         id: 2,
-//         type: messagesTypes.RECEIVED,
-//         content: "Hello",
-//       },
-//       {
-//         id: 3,
-//         type: messagesTypes.WARNING,
-//         content: "Command invalid. Please enter valid command",
-//       },
-//       {
-//         id: 4,
-//         type: messagesTypes.CREATED,
-//         content:
-//           "Command invalid. Please enter valid command. Command invalid. Please enter valid command. Command invalid. Please enter valid command.",
-//       },
-//     ],
-//   },
-// ];
-
 export const initialState = {
   onlineUsers: [],
   chatHistory: [],
