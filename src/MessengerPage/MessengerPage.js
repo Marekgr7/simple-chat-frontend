@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 `;
 
 const Chatboxes = styled.div`
@@ -26,12 +25,19 @@ const Chatboxes = styled.div`
   height: 450px;
 `;
 
+const Title = styled.div`
+  width: 100%;
+  margin: 70px 0;
+`;
+
 const MessengerPage = () => {
   const { onlineUsers, myNick } = useSelector((state) => state.messenger);
 
   return (
     <Wrapper>
-      <Label text={`${messages.title} ${myNick}`} />
+      <Title>
+        <Label text={`${messages.title} ${myNick}`} />
+      </Title>
       <Chatboxes>
         <TransitionGroup component={null}>
           {onlineUsers.map((user) => (
