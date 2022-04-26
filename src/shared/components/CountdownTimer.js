@@ -25,7 +25,7 @@ const CountdownTimer = ({ countdownDetails }) => {
     if (amountOfSeconds < 1) {
       window.location.href = countdownDetails.url.toString();
     }
-  }, [amountOfSeconds]);
+  }, [amountOfSeconds, countdownDetails.url]);
 
   return <Wrapper>{amountOfSeconds}</Wrapper>;
 };
