@@ -1,21 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import messages from "./MessengerPage.messages";
 
-// export const DUMMY_ONLINE_USERS = [
-//   {
-//     socketId: "123",
-//     nick: "Canelo",
-//   },
-//   {
-//     socketId: "345",
-//     nick: "GGG",
-//   },
-//   {
-//     socketId: "567",
-//     nick: null,
-//   },
-// ];
-
 // export const DUMMY_CHAT_HISTORY = [
 //   {
 //     socketId: "123",
