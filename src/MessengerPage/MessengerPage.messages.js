@@ -33,6 +33,7 @@ const messages = {
   thinkCommandDescription:
     "Type /think before message which you would like to send. It will appear in grey color. For example: '/think hello mate'",
   commands: "Commands:",
+  redirectionInfo: "Redirection in:",
 };
 
 export default messages;

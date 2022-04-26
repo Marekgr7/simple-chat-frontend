@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import messages from "../../MessengerPage/MessengerPage.messages";
 
 const Wrapper = styled.p`
   position: absolute;
@@ -27,7 +28,7 @@ const CountdownTimer = ({ countdownDetails }) => {
     }
   }, [amountOfSeconds, countdownDetails.url]);
 
-  return <Wrapper>{amountOfSeconds}</Wrapper>;
+  return <Wrapper>{`${messages.redirectionInfo} ${amountOfSeconds}`}</Wrapper>;
 };
 
 CountdownTimer.propTypes = {
