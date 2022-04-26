@@ -6,7 +6,7 @@ const Wrapper = styled.p`
   position: absolute;
   top: 50px;
   right: 50px;
-  font-size: 16px;
+  font-size: 32px;
   font-weight: bold;
 `;
 

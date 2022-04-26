@@ -27,9 +27,11 @@ const messages = {
     "Changes your nickname (Between 3 and 8 characters, no spaces allowed)",
   fadeLastCommandDescription: "Fade the last message in chat",
   highlightMessageCommandDescription:
-    "Highlights specific messages. After command provide message which you would like to highlight. For example: '/highlight hello'",
+    "Highlights specific existing messages. After command provide message which you would like to highlight. For example: '/highlight hello'",
   countdownCommandDescription:
     "Starts a countdown timer which will redirect you to specified URL",
+  thinkCommandDescription:
+    "Type /think before message which you would like to send. It will appear in grey color. For example: '/think hello mate'",
   commands: "Commands:",
 };
 

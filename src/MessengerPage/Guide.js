@@ -25,6 +25,10 @@ const commandDescriptions = [
     command: chatCommands.COUNTDOWN,
     description: messages.countdownCommandDescription,
   },
+  {
+    command: chatCommands.THINK,
+    description: messages.thinkCommandDescription,
+  },
 ];
 
 const Wrapper = styled.div`
