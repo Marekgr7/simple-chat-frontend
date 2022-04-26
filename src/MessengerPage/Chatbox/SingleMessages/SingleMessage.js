@@ -20,7 +20,7 @@ const MessageLeft = styled.p`
   padding: 10px;
   margin: 5px 5px;
   border-radius: 25px;
-  background: #00bca4;
+  background: rgba(211, 211, 211, 0.9);
   font-size: 14px;
   max-width: 80%;
 `;
@@ -30,7 +30,7 @@ const MessageRight = styled.p`
   padding: 10px;
   margin: 5px 5px;
   border-radius: 25px;
-  background: #27dcc5;
+  background: rgba(39, 220, 197, 0.9);
   font-size: 14px;
   max-width: 80%;
 `;
