@@ -10,4 +10,14 @@ const store = configureStore({
   },
 });
 
+export function getStoreWithState(preloadedState) {
+  return configureStore({
+    reducer: {
+      messenger: messengerReducer,
+      realtimeCommunication: realtimeCommunicationReducer,
+    },
+    preloadedState,
+  });
+}
+
 export default store;
